@@ -9,7 +9,7 @@ class ApiServices {
 
   Future<List<Map<String, dynamic>>> getAllMovies() async {
     final response = await http.get(
-      Uri.parse("$baseUrl/movie/now_playing"),
+      Uri.parse("$baseUrl/movie/now_playing?api_key=$apiKey"),
     );
     final data = json.decode(response.body);
     return List<Map<String, dynamic>>.from(data['results']);
@@ -17,7 +17,7 @@ class ApiServices {
 
   Future<List<Map<String, dynamic>>> getTrendingMovies() async {
     final response = await http.get(
-      Uri.parse("$baseUrl/movie/week?api_key=$apiKey"),
+      Uri.parse("$baseUrl/trending/movie/week?api_key=$apiKey"),
     );
     final data = json.decode(response.body);
     return List<Map<String, dynamic>>.from(data['results']);
