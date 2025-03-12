@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pilem/models/movie.dart';
 
@@ -17,11 +18,17 @@ class DetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.network(
-                "https://image.tmdb.org/t/p/w500${movie.backdropPath}",
+              CachedNetworkImage(
+                imageUrl: "https://image.tmdb.org/t/p/w500${movie.backdropPath}",
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
+                placeholder: (context, url) {
+                  return Center(
+                    child: CircularProgressIndicator(color: Colors.blue,),
+                  );
+                },
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               SizedBox(height: 20,),
               Text(
